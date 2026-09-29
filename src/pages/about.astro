@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout title="About — Lyra Wang" description="Who is the person behind all of this?">
+  <section class="placeholder-page">
+    <div class="container">
+      <p class="metadata">About</p>
+      <h1>About</h1>
+      <p class="placeholder-text">
+        This page is planned for a future phase. It will tell the story behind the projects —
+        why I started, why I keep using AI to solve real problems, and what I care about.
+      </p>
+      <p class="placeholder-note">Phase 1 does not include a full About page. It comes after Review, and will not be a CV.</p>
+      <Button href="/" variant="secondary">← Back to Home</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .placeholder-page {
+    padding: var(--space-10) 0;
+  }
+  .placeholder-page .metadata {
+    margin-bottom: var(--space-4);
+  }
+  .placeholder-page h1 {
+    margin-bottom: var(--space-5);
+  }
+  .placeholder-text {
+    font-size: var(--font-size-body);
+    color: var(--color-text-secondary);
+    max-width: var(--container-narrow);
+    margin-bottom: var(--space-3);
+    line-height: var(--line-height-relaxed);
+  }
+  .placeholder-note {
+    font-size: var(--font-size-caption);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    font-style: italic;
+  }
+</style>

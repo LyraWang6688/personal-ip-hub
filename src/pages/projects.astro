@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+---
+
+<BaseLayout title="Projects — Lyra Wang" description="Real projects built and iterated over time.">
+  <section class="placeholder-page">
+    <div class="container">
+      <p class="metadata">Projects</p>
+      <h1>Projects</h1>
+      <p class="placeholder-text">
+        This page is planned for a future phase. It will contain full project details —
+        Problem, Context, Key Decisions, What I Built, What Changed, What I Learned, and Evidence.
+      </p>
+      <p class="placeholder-note">Phase 1 delivers project previews on the Home page. Full project detail pages come after Review.</p>
+      <Button href="/" variant="secondary">← Back to Home</Button>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .placeholder-page {
+    padding: var(--space-10) 0;
+  }
+  .placeholder-page .metadata {
+    margin-bottom: var(--space-4);
+  }
+  .placeholder-page h1 {
+    margin-bottom: var(--space-5);
+  }
+  .placeholder-text {
+    font-size: var(--font-size-body);
+    color: var(--color-text-secondary);
+    max-width: var(--container-narrow);
+    margin-bottom: var(--space-3);
+    line-height: var(--line-height-relaxed);
+  }
+  .placeholder-note {
+    font-size: var(--font-size-caption);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-6);
+    font-style: italic;
+  }
+</style>

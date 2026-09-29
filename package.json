@@ -1,0 +1,21 @@
+{
+  "name": "personal-ip-hub",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal website and public identity hub for projects, learning, AI collaboration, writing, and long-term capability building.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.7.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0",
+    "typescript": "^5.7.0"
+  }
+}

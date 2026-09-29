@@ -1,0 +1,79 @@
+---
+import type { ReadingItem } from '../data/reading';
+
+interface Props {
+  item: ReadingItem;
+}
+const { item } = Astro.props;
+const statusLabel: Record<string, string> = {
+  reading: 'Reading',
+  finished: 'Finished',
+  revisiting: 'Revisiting',
+};
+---
+
+<article class="reading-item">
+  <div class="reading-header">
+    <span class:list={['reading-status', `status-${item.status}`]}>
+      {statusLabel[item.status]}
+    </span>
+    <span class="reading-type metadata">{item.type}</span>
+  </div>
+
+  <h4 class="reading-title">{item.title}</h4>
+  <p class="reading-author">by {item.author}</p>
+
+  <p class="reading-reflection">{item.whyItMatters}</p>
+</article>
+
+<style>
+  .reading-item {
+    padding: var(--space-5) 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .reading-item:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .reading-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-3);
+  }
+  .reading-status {
+    font-size: var(--font-size-metadata);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-uppercase);
+    color: var(--color-accent);
+    font-weight: var(--font-weight-medium);
+  }
+  .reading-type {
+    color: var(--color-text-muted);
+  }
+
+  .reading-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-1);
+    line-height: 1.35;
+  }
+  .reading-author {
+    font-size: var(--font-size-caption);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+  }
+  .reading-reflection {
+    font-size: var(--font-size-body-small);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-body);
+    max-width: 36rem;
+  }
+
+  @media (max-width: 768px) {
+    .reading-item {
+      padding: var(--space-4) 0;
+    }
+  }
+</style>
