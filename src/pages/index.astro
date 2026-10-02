@@ -2,12 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import SectionHeader from '../components/SectionHeader.astro';
-import ProjectPreview from '../components/ProjectPreview.astro';
 import NowThemeCard from '../components/NowThemeCard.astro';
 import EmptyState from '../components/EmptyState.astro';
 import Button from '../components/Button.astro';
 import TextLink from '../components/TextLink.astro';
-import { projects } from '../data/projects';
+import { aiWorkflowSteps } from '../data/method';
 import { nowThemes } from '../data/now';
 import { evidenceChannels } from '../data/evidence-channels';
 
@@ -21,18 +20,12 @@ import { evidenceChannels } from '../data/evidence-channels';
  * Sections without confirmed content render a restrained empty state rather than
  * invented copy. Section order and the value proposition are Product Owner
  * decisions and must not be changed here without that direction.
+ *
+ * Featured Work (§03) intentionally renders no project cards: choosing a featured
+ * subset is a Product Owner editorial decision (Agent Ownership v1 §12), and
+ * listing every project here would itself be a selection made by the Site Owner.
+ * Full project records live at /work.
  */
-
-// Preview only — the full method outline lives at /how-i-work.
-const aiWorkflowSteps = [
-  'Problem Framing',
-  'Product / Architecture',
-  'AI Developer',
-  'Review / QA',
-  'Runtime',
-  'Feedback',
-  'Iteration',
-];
 ---
 
 <BaseLayout
@@ -82,18 +75,21 @@ const aiWorkflowSteps = [
   <Section id="featured-work" className="section-alt">
     <SectionHeader
       eyebrow="Featured Work"
-      title="What has actually been built"
-      description="Real projects, iterated over time. Each record states the problem, the approach, the current stage, and what evidence exists."
+      title="Selected proof"
+      description="Selected proof through real products and systems."
     />
     <!--
-      TODO (Product Owner): which projects are *featured* on Home is an editorial
-      decision. All four existing records are shown because each has stated
-      evidence; this is not a ranking and should be reduced once featured
-      selection is decided.
+      Featured selection is a Product Owner editorial decision (Agent Ownership
+      v1 §12). Rendering all projects here would itself be an editorial selection
+      made by the Site Owner, so the section keeps its structure and renders no
+      project cards. Full project records remain available at /work — listing
+      projects under Work is a different editorial state from featuring them here.
+      Do not add a `featured` flag to project data without Product Owner direction.
     -->
-    <div class="projects-list">
-      {projects.map((project, index) => <ProjectPreview project={project} index={index} />)}
-    </div>
+    <EmptyState
+      note="No featured work selected yet."
+      detail="All current project records are available under Work."
+    />
     <div class="section-footer-link">
       <TextLink href="/work">See all work</TextLink>
     </div>
@@ -283,9 +279,6 @@ const aiWorkflowSteps = [
   /* ---------- Shared ---------- */
   .section-footer-link {
     margin-top: var(--space-6);
-  }
-  .projects-list {
-    margin-bottom: var(--space-4);
   }
 
   /* ---------- AI Workflow preview ---------- */

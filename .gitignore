@@ -23,3 +23,8 @@ pnpm-debug.log*
 
 # astro
 .astro/
+
+# local screenshot output from scripts/screenshot.mjs
+# kept out of the repository: screenshots are local verification artifacts, and
+# the site repository is public
+screenshots/
