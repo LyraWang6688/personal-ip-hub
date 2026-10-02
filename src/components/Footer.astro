@@ -1,5 +1,13 @@
 ---
+import { evidenceChannels, type EvidenceChannel } from '../data/evidence-channels';
+
 const year = new Date().getFullYear();
+
+// Only channels with a confirmed public URL are linked. A channel without one is
+// omitted rather than rendered as a "to be confirmed" placeholder.
+const publicChannels = evidenceChannels.filter(
+  (channel): channel is EvidenceChannel & { url: string } => Boolean(channel.url)
+);
 ---
 
 <footer class="site-footer">
@@ -7,20 +15,21 @@ const year = new Date().getFullYear();
     <div class="footer-brand">
       <p class="footer-name">Lyra Wang</p>
       <p class="footer-tagline">
-        Building real things with AI — through projects, practice, and long-term learning.
+        A public record of work, method, learning, and writing.
       </p>
     </div>
 
     <nav class="footer-links" aria-label="Footer">
       <ul>
-        <li>
-          <a href="https://github.com/LyraWang6688" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-        </li>
-        <li>
-          <span class="contact-placeholder">Contact — email to be confirmed</span>
-        </li>
+        {
+          publicChannels.map((channel) => (
+            <li>
+              <a href={channel.url} target="_blank" rel="noopener noreferrer">
+                {channel.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
   </div>

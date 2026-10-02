@@ -14,41 +14,16 @@ export interface ReadingItem {
   date?: string;
 }
 
-// PLACEHOLDER: No real reading data has been confirmed yet.
-// These entries are placeholders to demonstrate the Reading section structure.
-// Replace with Lyra's actual reading before launch.
-export const readingItems: ReadingItem[] = [
-  {
-    id: 'placeholder-1',
-    title: '[Placeholder] Title to be confirmed',
-    author: '[Author to be confirmed]',
-    type: 'book',
-    status: 'reading',
-    whyItMatters:
-      'Placeholder — this space will show why Lyra is reading this now and what ideas are staying with her. No real reading data has been confirmed yet.',
-    relatedTopics: ['Topic TBD'],
-    relatedProjects: [],
-  },
-  {
-    id: 'placeholder-2',
-    title: '[Placeholder] Title to be confirmed',
-    author: '[Author to be confirmed]',
-    type: 'article',
-    status: 'reading',
-    whyItMatters:
-      'Placeholder — a short reflection on what is shaping her thinking right now. To be replaced with real content.',
-    relatedTopics: ['Topic TBD'],
-    relatedProjects: [],
-  },
-  {
-    id: 'placeholder-3',
-    title: '[Placeholder] Title to be confirmed',
-    author: '[Author to be confirmed]',
-    type: 'book',
-    status: 'revisiting',
-    whyItMatters:
-      'Placeholder — revisiting an earlier read with new context. To be replaced with real content.',
-    relatedTopics: ['Topic TBD'],
-    relatedProjects: [],
-  },
-];
+/**
+ * Reading is a subdomain of Learning (IA v1 §6), not a top-level domain.
+ *
+ * This array is intentionally empty. The previous build shipped three invented
+ * `[Placeholder]` entries, which rendered as if they were real reading records on
+ * the public homepage. No verified reading data exists yet, so nothing is
+ * published here.
+ *
+ * TODO (Phase 3 / Reading Agent): populate with verified reading records under
+ * `content/learning/reading/**`. The ReadingItem component is retained for that
+ * work. Do not add placeholder rows — add real records or leave this empty.
+ */
+export const readingItems: ReadingItem[] = [];

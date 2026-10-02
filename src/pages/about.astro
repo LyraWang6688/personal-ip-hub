@@ -1,44 +1,94 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/Button.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import EmptyState from '../components/EmptyState.astro';
+import TextLink from '../components/TextLink.astro';
+import { evidenceChannels } from '../data/evidence-channels';
 ---
 
-<BaseLayout title="About — Lyra Wang" description="Who is the person behind all of this?">
-  <section class="placeholder-page">
-    <div class="container">
-      <p class="metadata">About</p>
-      <h1>About</h1>
-      <p class="placeholder-text">
-        This page is planned for a future phase. It will tell the story behind the projects —
-        why I started, why I keep using AI to solve real problems, and what I care about.
-      </p>
-      <p class="placeholder-note">Phase 1 does not include a full About page. It comes after Review, and will not be a CV.</p>
-      <Button href="/" variant="secondary">← Back to Home</Button>
-    </div>
-  </section>
+<BaseLayout
+  title="About — Lyra Wang"
+  description="Who is behind this work, which public profiles are verified, and how to get in touch."
+>
+  <PageHeader
+    eyebrow="About"
+    title="About"
+    description="Who is behind this work, what the current focus is, and how to get in touch. This is not a CV, and no claim is made here that is not confirmed."
+  />
+
+  <!-- Only profiles with a confirmed public URL are rendered. -->
+  <Section id="profiles">
+    <SectionHeader
+      title="Verified public profiles"
+      description="Public identities that can be checked directly."
+    />
+    <ul class="channels">
+      {
+        evidenceChannels.map((channel) => (
+          <li class="channel">
+            <h3 class="channel-label">{channel.label}</h3>
+            <p class="channel-description">{channel.description}</p>
+            {channel.url && (
+              <TextLink href={channel.url} external>
+                {channel.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+              </TextLink>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </Section>
+
+  <Section id="background" className="section-alt">
+    <SectionHeader
+      title="Background"
+      description="The path into this work, and what matters about how it is approached."
+    />
+    <EmptyState
+      note="Not yet published."
+      detail="Personal background is added only once the wording has been confirmed — it is not drafted on the site owner's behalf."
+    />
+  </Section>
+
+  <Section id="contact">
+    <SectionHeader
+      title="Contact"
+      description="The appropriate route for getting in touch."
+    />
+    <EmptyState
+      note="Contact details not published yet."
+      detail="A contact address is added once it is confirmed and safe to publish. Public profiles listed above remain available in the meantime."
+    />
+  </Section>
 </BaseLayout>
 
 <style>
-  .placeholder-page {
-    padding: var(--space-10) 0;
+  .channels {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: var(--space-6);
   }
-  .placeholder-page .metadata {
+  .channel {
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+  .channel-label {
+    font-size: var(--font-size-h4);
+    margin-bottom: var(--space-2);
+  }
+  .channel-description {
+    font-size: var(--font-size-body-small);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
     margin-bottom: var(--space-4);
   }
-  .placeholder-page h1 {
-    margin-bottom: var(--space-5);
-  }
-  .placeholder-text {
-    font-size: var(--font-size-body);
-    color: var(--color-text-secondary);
-    max-width: var(--container-narrow);
-    margin-bottom: var(--space-3);
-    line-height: var(--line-height-relaxed);
-  }
-  .placeholder-note {
-    font-size: var(--font-size-caption);
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-6);
-    font-style: italic;
+
+  @media (max-width: 768px) {
+    .channels {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
   }
 </style>

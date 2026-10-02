@@ -1,6 +1,9 @@
+export type ProjectCategory = 'flagship-products' | 'ai-infrastructure';
+
 export interface Project {
   id: string;
   name: string;
+  /** Chinese alias. Rendered with an explicit lang attribute, not as UI language. */
   nameZh: string;
   tagline: string;
   problem: string;
@@ -9,6 +12,15 @@ export interface Project {
   evidence: string;
   status: 'active' | 'iterating' | 'building';
   year?: string;
+  /**
+   * The Work domain groups projects into "Flagship Products" and "AI Infrastructure".
+   *
+   * TODO (Product Owner): assigning a project to a group is an editorial decision
+   * and has not been made yet, so this is intentionally left undefined on every
+   * record. The Work page renders both groups as structure and lists these records
+   * under a separate "not yet classified" container. Do not guess a category here.
+   */
+  category?: ProjectCategory;
 }
 
 export const projects: Project[] = [

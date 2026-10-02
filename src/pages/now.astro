@@ -1,44 +1,53 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/Button.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import NowThemeCard from '../components/NowThemeCard.astro';
+import TextLink from '../components/TextLink.astro';
+import { nowThemes } from '../data/now';
 ---
 
-<BaseLayout title="Now — Lyra Wang" description="What Lyra is working on and learning right now, through practice.">
-  <section class="placeholder-page">
-    <div class="container">
-      <p class="metadata">Now</p>
-      <h1>What I'm doing now</h1>
-      <p class="placeholder-text">
-        This page is planned for a future phase. It will show what I'm working on and learning —
-        through real practice, not courses or certificates.
-      </p>
-      <p class="placeholder-note">Phase 1 delivers a Now preview on the Home page. Full Now page comes after Review.</p>
-      <Button href="/" variant="secondary">← Back to Home</Button>
+<BaseLayout
+  title="Now — Lyra Wang"
+  description="What is being worked on and learned right now, through real projects rather than courses or certificates."
+>
+  <PageHeader
+    eyebrow="Now"
+    title="What I'm doing now"
+    description="A snapshot of current focus. This is a supporting page rather than a primary domain: what is being learned is recorded under Learning, and this page shows where that learning is happening right now."
+  />
+
+  <Section id="focus">
+    <div class="now-grid">
+      {nowThemes.map((theme) => <NowThemeCard theme={theme} />)}
     </div>
-  </section>
+
+    <p class="now-principle">
+      <em>Learning through building — practice, not courses.</em>
+    </p>
+
+    <TextLink href="/learning">See how learning is recorded</TextLink>
+  </Section>
 </BaseLayout>
 
 <style>
-  .placeholder-page {
-    padding: var(--space-10) 0;
+  .now-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+    margin-bottom: var(--space-7);
   }
-  .placeholder-page .metadata {
-    margin-bottom: var(--space-4);
-  }
-  .placeholder-page h1 {
+  .now-principle {
+    font-family: var(--font-display);
+    color: var(--color-text-muted);
     margin-bottom: var(--space-5);
   }
-  .placeholder-text {
-    font-size: var(--font-size-body);
-    color: var(--color-text-secondary);
-    max-width: var(--container-narrow);
-    margin-bottom: var(--space-3);
-    line-height: var(--line-height-relaxed);
-  }
-  .placeholder-note {
-    font-size: var(--font-size-caption);
-    color: var(--color-text-muted);
-    margin-bottom: var(--space-6);
-    font-style: italic;
+
+  @media (max-width: 768px) {
+    .now-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
   }
 </style>

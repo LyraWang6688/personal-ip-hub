@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import EmptyState from '../components/EmptyState.astro';
+import TextLink from '../components/TextLink.astro';
+---
+
+<BaseLayout
+  title="Learning — Lyra Wang"
+  description="How understanding develops over time: learning through projects, reading, notes, and open questions."
+>
+  <PageHeader
+    eyebrow="Learning"
+    title="How understanding develops"
+    description="This domain records what was learned and how understanding changed. It is the source of truth for learning, and reading is one of its subdomains rather than a separate area."
+  />
+
+  <!--
+    "Currently learning" lives on /now. It is linked rather than duplicated so
+    that the same fact is not maintained in two places (IA v1 §11).
+  -->
+  <Section id="currently-learning">
+    <SectionHeader
+      title="Currently learning"
+      description="What is being worked on and learned right now is kept in one place and linked from here."
+    />
+    <TextLink href="/now">See what I'm doing now</TextLink>
+  </Section>
+
+  <Section id="reading" className="section-alt">
+    <SectionHeader
+      title="Reading"
+      description="Reading sits inside Learning. It records what is being read, why now, and what ideas stay."
+    />
+    <EmptyState
+      note="No reading records published yet."
+      detail="Records are added once titles and reflections are confirmed — nothing is listed here on the basis of a guess."
+    />
+  </Section>
+
+  <Section id="notes">
+    <SectionHeader
+      title="Notes and open questions"
+      description="Working notes and questions being explored. Learning notes stay in this domain unless they are deliberately formed into a public piece under Writing & Research."
+    />
+    <EmptyState
+      note="No notes published yet."
+      detail="Notes are published only once they have been reviewed for accuracy."
+    />
+  </Section>
+</BaseLayout>

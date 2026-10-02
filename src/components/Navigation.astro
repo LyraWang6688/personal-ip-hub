@@ -1,5 +1,6 @@
 ---
 import { navigation } from '../data/navigation';
+import { isCurrentPath } from '../utils/url';
 
 const currentPath = Astro.url.pathname;
 ---
@@ -18,8 +19,8 @@ const currentPath = Astro.url.pathname;
             <li>
               <a
                 href={item.href}
-                class:list={['nav-link', { active: currentPath === item.href }]}
-                aria-current={currentPath === item.href ? 'page' : undefined}
+                class:list={['nav-link', { active: isCurrentPath(currentPath, item.href) }]}
+                aria-current={isCurrentPath(currentPath, item.href) ? 'page' : undefined}
               >
                 {item.label}
               </a>
@@ -32,9 +33,10 @@ const currentPath = Astro.url.pathname;
     <!-- Mobile toggle -->
     <button
       class="nav-toggle"
+      type="button"
       aria-expanded="false"
       aria-controls="mobile-menu"
-      aria-label="Toggle navigation menu"
+      aria-label="Open navigation menu"
     >
       <span class="toggle-bar" aria-hidden="true"></span>
       <span class="toggle-bar" aria-hidden="true"></span>
@@ -42,18 +44,17 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <!-- Mobile Navigation -->
-  <nav class="nav-mobile" id="mobile-menu" aria-label="Mobile" hidden>
+  <nav class="nav-mobile" id="mobile-menu" aria-label="Primary (mobile)" hidden>
     <ul>
       {
         navigation.map((item) => (
           <li>
             <a
               href={item.href}
-              class:list={['nav-link-mobile', { active: currentPath === item.href }]}
-              aria-current={currentPath === item.href ? 'page' : undefined}
+              class:list={['nav-link-mobile', { active: isCurrentPath(currentPath, item.href) }]}
+              aria-current={isCurrentPath(currentPath, item.href) ? 'page' : undefined}
             >
-              <span class="nav-label-en">{item.label}</span>
-              {item.labelZh && <span class="nav-label-zh">{item.labelZh}</span>}
+              {item.label}
             </a>
           </li>
         ))
@@ -65,26 +66,48 @@ const currentPath = Astro.url.pathname;
 <script>
   const toggle = document.querySelector('.nav-toggle') as HTMLButtonElement | null;
   const mobileMenu = document.getElementById('mobile-menu');
+  const DESKTOP_BREAKPOINT = 860;
 
   if (toggle && mobileMenu) {
-    toggle.addEventListener('click', () => {
-      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', String(!isOpen));
-      toggle.classList.toggle('open', !isOpen);
-      if (isOpen) {
-        mobileMenu.setAttribute('hidden', '');
-      } else {
+    const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Close navigation menu' : 'Open navigation menu');
+      toggle.classList.toggle('open', open);
+
+      if (open) {
         mobileMenu.removeAttribute('hidden');
+        document.body.style.overflow = 'hidden';
+        // Move focus into the menu so keyboard users land in the opened content.
+        mobileMenu.querySelector('a')?.focus();
+      } else {
+        mobileMenu.setAttribute('hidden', '');
+        document.body.style.overflow = '';
+      }
+    };
+
+    toggle.addEventListener('click', () => setOpen(!isOpen()));
+
+    // Close the menu once a destination is chosen.
+    mobileMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    // Escape closes the menu and hands focus back to the toggle.
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isOpen()) {
+        setOpen(false);
+        toggle.focus();
       }
     });
 
-    // Close menu when a link is clicked
-    mobileMenu.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', () => {
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.classList.remove('open');
-        mobileMenu.setAttribute('hidden', '');
-      });
+    // Reset state when the viewport grows past the mobile layout, so the menu
+    // can never remain "open" (and scroll-locked) on desktop.
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > DESKTOP_BREAKPOINT && isOpen()) {
+        setOpen(false);
+      }
     });
   }
 </script>
@@ -122,7 +145,7 @@ const currentPath = Astro.url.pathname;
   /* Desktop nav */
   .nav-desktop ul {
     display: flex;
-    gap: var(--space-6);
+    gap: var(--space-5);
     align-items: center;
   }
   .nav-link {
@@ -131,6 +154,7 @@ const currentPath = Astro.url.pathname;
     transition: color var(--transition-fast);
     position: relative;
     padding-block: 0.25rem;
+    white-space: nowrap;
   }
   .nav-link:hover {
     color: var(--color-text);
@@ -176,6 +200,8 @@ const currentPath = Astro.url.pathname;
   .nav-mobile {
     border-top: 1px solid var(--color-border);
     background: var(--color-bg);
+    max-height: calc(100dvh - 4rem);
+    overflow-y: auto;
   }
   .nav-mobile ul {
     display: flex;
@@ -184,26 +210,18 @@ const currentPath = Astro.url.pathname;
     gap: var(--space-1);
   }
   .nav-link-mobile {
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-3);
+    display: block;
     padding: var(--space-3) 0;
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-medium);
     border-bottom: 1px solid var(--color-border);
     transition: color var(--transition-fast);
   }
   .nav-link-mobile:last-child {
     border-bottom: none;
   }
-  .nav-label-en {
-    font-family: var(--font-display);
-    font-size: 1.125rem;
-    font-weight: var(--font-weight-medium);
-  }
-  .nav-label-zh {
-    font-size: var(--font-size-caption);
-    color: var(--color-text-muted);
-  }
-  .nav-link-mobile.active .nav-label-en {
+  .nav-link-mobile.active {
     color: var(--color-accent);
   }
 
@@ -214,6 +232,14 @@ const currentPath = Astro.url.pathname;
     }
     .nav-toggle {
       display: flex;
+    }
+  }
+
+  /* The mobile menu must never render in the desktop layout, even if it was
+     opened at a narrow width and the viewport was then resized. */
+  @media (min-width: 861px) {
+    .nav-mobile {
+      display: none;
     }
   }
 </style>

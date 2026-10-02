@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import EmptyState from '../components/EmptyState.astro';
+
+/**
+ * Method areas — IA v1 §5. These are the themes this domain is structured to
+ * hold. Naming them is not a claim that each has a published case study; the
+ * empty state below states that explicitly.
+ */
+const methodAreas = [
+  'Problem Framing',
+  'Product / Solution Architecture',
+  'Contract Design',
+  'State Ownership',
+  'AI-assisted Implementation',
+  'Multi-Agent Collaboration',
+  'Independent Review / QA',
+  'Runtime Verification',
+  'Feedback',
+  'Iteration',
+  'Release and Governance',
+];
+
+const aiWorkflowSteps = [
+  'Problem Framing',
+  'Product / Architecture',
+  'AI Developer',
+  'Review / QA',
+  'Runtime',
+  'Feedback',
+  'Iteration',
+];
+
+const aiPractices = [
+  'ChatGPT for problem framing, product and architecture discussion',
+  'Codex / AI Developer for concrete implementation',
+  'Independent Reviewer / QA for review and quality assurance',
+  'Multi-Agent collaboration with defined roles',
+  'Official API documentation + clear context + module boundaries',
+  'Runtime verification of real results, then iteration on feedback',
+];
+---
+
+<BaseLayout
+  title="How I Work — Lyra Wang"
+  description="The working method: how problems are framed, decided, implemented, reviewed, verified, and iterated."
+>
+  <PageHeader
+    eyebrow="How I Work"
+    title="How problems get solved and built"
+    description="This domain records the method rather than the outcome: how a problem is framed, how the solution is decided, how implementation and review are separated, and how results are verified at runtime."
+  />
+
+  <!-- Real content: the AI-native workflow carried over from the previous Home implementation. -->
+  <Section id="ai-native-workflow">
+    <SectionHeader
+      title="Not just using AI tools — practicing an AI-native working method"
+      description="AI is treated as a working method rather than a tool wall: framing problems clearly, defining contracts, letting AI implement, reviewing independently, and verifying through real runtime."
+    />
+
+    <div class="workflow">
+      <ol class="workflow-steps" aria-label="AI collaboration workflow">
+        {aiWorkflowSteps.map((step, index) => (
+          <li class="workflow-step">
+            <span class="workflow-number metadata">{String(index + 1).padStart(2, '0')}</span>
+            <span class="workflow-label">{step}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+
+    <div class="practices">
+      <p class="practices-label metadata">In practice</p>
+      <ul class="practices-list">
+        {aiPractices.map((practice) => <li>{practice}</li>)}
+      </ul>
+    </div>
+  </Section>
+
+  <!-- Declared IA structure: the method areas this domain is built to hold. -->
+  <Section id="method-areas" className="section-alt">
+    <SectionHeader
+      title="Method areas"
+      description="The areas this domain is structured around. Written method notes are added as they can be connected to real evidence."
+    />
+
+    <ul class="method-areas">
+      {methodAreas.map((area) => <li class="method-area">{area}</li>)}
+    </ul>
+
+    <EmptyState
+      note="No method notes published yet."
+      detail="Each area will link to the real work where the method was applied."
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .workflow {
+    margin-bottom: var(--space-7);
+  }
+  .workflow-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+  }
+  .workflow-step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+  }
+  .workflow-number {
+    color: var(--color-text-muted);
+    font-family: var(--font-display);
+  }
+  .workflow-label {
+    font-size: var(--font-size-body-small);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .practices {
+    max-width: var(--container-narrow);
+  }
+  .practices-label {
+    margin-bottom: var(--space-3);
+  }
+  .practices-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .practices-list li {
+    font-size: var(--font-size-body-small);
+    color: var(--color-text-secondary);
+    padding-left: var(--space-4);
+    position: relative;
+    line-height: 1.6;
+  }
+  .practices-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 1px;
+    background: var(--color-accent);
+  }
+
+  .method-areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: var(--space-2) var(--space-5);
+    margin-bottom: var(--space-7);
+    max-width: var(--container-max);
+  }
+  .method-area {
+    font-size: var(--font-size-body-small);
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+    padding-block: var(--space-3);
+  }
+
+  @media (max-width: 768px) {
+    .workflow-steps {
+      gap: var(--space-2);
+    }
+    .workflow-step {
+      padding: var(--space-2) var(--space-3);
+    }
+    .method-areas {
+      grid-template-columns: 1fr;
+      margin-bottom: var(--space-6);
+    }
+  }
+</style>

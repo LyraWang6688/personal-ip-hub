@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ProjectPreview from '../components/ProjectPreview.astro';
+import EmptyState from '../components/EmptyState.astro';
+import { projects } from '../data/projects';
+---
+
+<BaseLayout
+  title="Work — Lyra Wang"
+  description="Real products and systems: the problem each one addresses, the approach taken, and its current state."
+>
+  <PageHeader
+    eyebrow="Work"
+    title="What has actually been built"
+    description="This domain records where the real project activity happened: the problem being addressed, the approach taken, what changed over time, and the current state."
+  />
+
+  <!--
+    Real project records lead the page. These four records came from the previous
+    Home implementation and are kept because they describe real projects with
+    stated evidence.
+  -->
+  <Section id="records">
+    <SectionHeader
+      title="Project records"
+      description="Each record states the problem, the practice, the current stage, and what evidence exists."
+    />
+    <div class="records-list">
+      {projects.map((project, index) => <ProjectPreview project={project} index={index} />)}
+    </div>
+  </Section>
+
+  <!--
+    Declared IA structure: Work is grouped into these two areas (IA v1 §4).
+    Which project belongs to which group is an editorial decision owned by the
+    Product Owner and has not been made, so both groups are rendered as structure
+    only. Do not assign a project to a group without that direction.
+  -->
+  <Section id="organisation" className="section-alt">
+    <SectionHeader
+      title="How this area is organised"
+      description="Work is grouped into two areas, so that projects are not treated as interchangeable merely because they are repositories."
+    />
+
+    <div class="groups">
+      <article class="group">
+        <h3 class="group-title">Flagship Products</h3>
+        <p class="group-description">
+          Representative real-world products and systems.
+        </p>
+        <EmptyState
+          note="Nothing assigned to this area yet."
+          detail="Projects are listed above while their grouping is being decided."
+        />
+      </article>
+
+      <article class="group">
+        <h3 class="group-title">AI Infrastructure</h3>
+        <p class="group-description">
+          Reusable systems or infrastructure supporting AI-native work.
+        </p>
+        <EmptyState
+          note="Nothing assigned to this area yet."
+          detail="Projects are listed above while their grouping is being decided."
+        />
+      </article>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .records-list {
+    margin-bottom: var(--space-4);
+  }
+
+  .groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-7);
+  }
+  .group-title {
+    font-size: var(--font-size-h4);
+    margin-bottom: var(--space-2);
+  }
+  .group-description {
+    font-size: var(--font-size-body-small);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-5);
+  }
+
+  @media (max-width: 768px) {
+    .groups {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+  }
+</style>

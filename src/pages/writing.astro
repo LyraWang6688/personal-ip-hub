@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import EmptyState from '../components/EmptyState.astro';
+
+/**
+ * Writing forms — IA v1 §7. WeChat is a publishing channel, not the structure
+ * of this domain, so it appears as one form among several rather than as an
+ * information-architecture level of its own.
+ */
+const writingForms = [
+  { title: 'Essays', description: 'Longer-form thinking formed into an argument.' },
+  { title: 'Articles', description: 'Pieces published through external channels.' },
+  { title: 'Research', description: 'Research questions and outputs.' },
+  { title: 'Talks & public sharing', description: 'Material prepared for a public audience.' },
+];
+---
+
+<BaseLayout
+  title="Writing & Research — Lyra Wang"
+  description="Ideas and research formed into public expression: essays, articles, research, and talks."
+>
+  <PageHeader
+    eyebrow="Writing & Research"
+    title="Formed for public expression"
+    description="This domain records what has been formed into an outward-facing idea, argument, research output, or public piece. Learning notes stay under Learning unless they are deliberately developed into a public asset."
+  />
+
+  <Section id="forms">
+    <SectionHeader
+      title="Forms this domain holds"
+      description="Publishing channels are destinations for writing, not the structure of it."
+    />
+
+    <dl class="writing-forms">
+      {
+        writingForms.map((form) => (
+          <div class="writing-form">
+            <dt class="form-title">{form.title}</dt>
+            <dd class="form-description">{form.description}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <EmptyState
+      note="No published writing yet."
+      detail="Nothing is listed here until a piece is actually published and its public link is confirmed."
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  .writing-forms {
+    max-width: var(--container-narrow);
+    margin-bottom: var(--space-7);
+  }
+  .writing-form {
+    padding-block: var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .writing-form:first-child {
+    border-top: 1px solid var(--color-border);
+  }
+  .form-title {
+    font-family: var(--font-display);
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--space-1);
+  }
+  .form-description {
+    font-size: var(--font-size-body-small);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .writing-forms {
+      margin-bottom: var(--space-6);
+    }
+  }
+</style>
