@@ -121,25 +121,28 @@ Suggested structure:
 - Currently Learning
 - Learning Through Projects
 - Reading
-- Notes
+- Learning Notes
 - Questions I am exploring
 
 Reading is a subdomain of Learning, not necessarily a top-level navigation item.
+
+Learning is the Source of Truth for what was learned and how understanding changed.
 
 ## 7. Writing & Research
 
 Core question:
 
-What is Lyra thinking, researching, and publishing?
+What has Lyra formed into an outward-facing idea, argument, research output, or public piece?
 
 Suggested structure:
 - Essays
 - WeChat Articles
 - Research
 - Talks / Public Sharing
-- Notes
 
 WeChat is a publishing channel, not the information architecture itself.
+
+Writing & Research is the Source of Truth for content that has been formed for public expression. Learning notes remain under Learning unless deliberately promoted into a distinct public writing asset.
 
 ## 8. Journey
 
@@ -173,6 +176,8 @@ Cross-domain evolution.
 
 ### Milestones
 Important events that shaped capability, judgment, or public identity.
+
+Journey is the Source of Truth for when meaningful changes happened. It should reference Work, Learning, Writing, and Evidence rather than duplicate their detailed narratives.
 
 ## 9. About
 
@@ -209,7 +214,41 @@ WeChat may appear in:
 
 The same source may support multiple contexts without becoming a top-level navigation item.
 
-## 11. Route Direction
+## 11. Cross-Domain Source-of-Truth Boundary
+
+Use these rules when one real-world event touches multiple domains:
+
+- **Work** stores where the real project activity happened.
+- **Learning** stores what was learned and how understanding changed.
+- **Journey** stores when an important change or milestone happened.
+- **Writing & Research** stores ideas or outputs that were deliberately formed for public expression.
+
+Example:
+
+A project may record that State Ownership was used in Retail Operations.
+
+Learning may record how Lyra's understanding of State Ownership changed.
+
+Journey may record when that capability became an important milestone.
+
+Writing may later contain a public essay about State Ownership.
+
+These records should reference one another through stable IDs where possible. They should not each maintain duplicate copies of the same underlying fact.
+
+## 12. Language Contract
+
+MVP language policy:
+
+- UI / navigation: English-first.
+- Personal, research, and writing content: original language is allowed.
+- Project titles may support English and Chinese aliases when useful.
+- A content asset should declare its language when the implementation supports metadata.
+- Automatic translation is not a Source of Truth.
+- Full zh/en localization is deferred until there is a real product need.
+
+Mixed-language content should be intentional, not accidental.
+
+## 13. Route Direction
 
 Expected route family:
 

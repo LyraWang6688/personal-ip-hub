@@ -81,7 +81,55 @@ Prefer evidence such as:
 
 Evidence should support the claim rather than merely decorate the page.
 
-## 5. Conversion
+### Evidence Safety Contract
+
+Evidence is evaluated on two separate dimensions:
+
+1. **Verification** — does it support the claim?
+2. **Visibility** — is it safe and appropriate to publish?
+
+Rule:
+
+**Verified Evidence ≠ Public Evidence.**
+
+Visibility values:
+
+- private
+- internal
+- public
+
+Before evidence becomes public, check for:
+- secrets and tokens;
+- credentials;
+- private URLs;
+- private repository information;
+- personal email / phone / addresses;
+- customer or user data;
+- internal business data;
+- confidential project information;
+- screenshots requiring redaction;
+- third-party material that should not be republished.
+
+If redaction is required, publish only the redacted or public-safe representation.
+
+The Product Owner is the final authority for public publication of sensitive evidence.
+
+## 5. Publication & Indexability
+
+Only content with `publication_status == published` should be part of normal public rendering and indexing.
+
+Rules:
+
+- `draft` → not public.
+- `review` → not public.
+- `published` → eligible for public rendering and indexing.
+- `archived` → not treated as current; may be exposed only through an intentional archive view.
+
+Merge does not equal Publish.
+
+A content change can exist in the repository without being discoverable by search engines or visitors.
+
+## 6. Conversion
 
 Goal:
 
@@ -91,7 +139,7 @@ Target path:
 
 Find → Understand → Trust → Prefer → Act
 
-## 6. Human Persuasion Layers
+## 7. Human Persuasion Layers
 
 ### Understand
 Clearly answer:
@@ -123,7 +171,7 @@ Give appropriate next steps:
 - contact;
 - collaborate.
 
-## 7. Value Proposition
+## 8. Value Proposition
 
 Avoid generic claims such as:
 - "AI expert"
@@ -139,7 +187,7 @@ Possible value themes must be validated by evidence before public use, for examp
 
 The final value proposition remains a Product Owner decision.
 
-## 8. Page-Level Test
+## 9. Page-Level Test
 
 For every major public page, ask:
 
@@ -150,6 +198,7 @@ For every major public page, ask:
 - What evidence supports them?
 - What related entities exist?
 - Is the URL stable?
+- Is this content actually approved for public indexing?
 
 ### Human Test
 - Why should I care?
@@ -159,7 +208,7 @@ For every major public page, ask:
 - What value might this create for me?
 - What should I do next?
 
-## 9. Content Quality Rule
+## 10. Content Quality Rule
 
 Do not optimize for AI search by producing low-value keyword content.
 
@@ -172,7 +221,7 @@ Prioritize:
 - external references when appropriate;
 - consistent identity across public channels.
 
-## 10. Launch Baseline
+## 11. Launch Baseline
 
 Before public launch, verify:
 - custom domain works;
@@ -181,6 +230,8 @@ Before public launch, verify:
 - sitemap exists;
 - robots.txt is valid;
 - core pages are indexable;
+- only `published` content is included in normal public rendering;
+- private / internal evidence cannot leak into the public build;
 - About/Profile page is complete;
 - key projects have independent URLs;
 - structured data validates;

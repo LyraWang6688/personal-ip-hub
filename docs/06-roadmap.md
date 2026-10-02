@@ -10,13 +10,22 @@ Goals:
 - freeze content domains;
 - freeze content contracts;
 - freeze Agent Ownership;
+- freeze Source-of-Truth boundaries;
+- freeze Publication Lifecycle;
+- freeze Evidence Safety / Visibility rules;
+- freeze the minimum Language Contract;
 - freeze Discoverability / Conversion principles.
 
 Deliverable:
 Architecture Pack v1.
 
 Exit criteria:
-The team can explain what every page and Agent owns without ambiguity.
+- the team can explain what every page and Agent owns without ambiguity;
+- no two Agents own the same content path;
+- Work / Learning / Journey / Writing boundaries are explicit;
+- Merge and Publish are separate states;
+- evidence visibility is explicit;
+- content-language rules are explicit enough for parallel Agent work.
 
 ## Phase 1 — Site Foundation
 
@@ -63,7 +72,16 @@ content/
 ├── method/
 ├── learning/
 ├── writing/
+│   ├── wechat/
+│   ├── essays/
+│   ├── research/
+│   └── talks/
 └── journey/
+    ├── overall/
+    ├── github/
+    ├── wechat/
+    ├── personal-ip/
+    └── milestones/
 ```
 
 Implement:
@@ -71,28 +89,34 @@ Implement:
 - stable IDs;
 - content loading;
 - clear ownership paths;
-- homepage editorial config.
+- publication lifecycle;
+- public rendering filter for `published`;
+- evidence visibility rules;
+- redaction-aware evidence handling;
+- homepage editorial config;
+- language metadata where relevant.
 
 Exit criteria:
-A Domain Agent can add or update content without touching shared UI.
+A Domain Agent can add or update owned content without touching shared UI, and a merged draft cannot accidentally become public.
 
 ## Phase 3 — Domain Content Population
 
 Start parallel content work after contracts are stable.
 
 Potential parallel workstreams:
-- GitHub IP Agent → GitHub Journey / evidence
-- WeChat Agent → writing / WeChat Journey
-- Meeting Agent → Meeting project case
-- Retail Agent → Retail project case
-- InvestDesk Agent → InvestDesk project case
-- Reading Agent → verified reading content
-- Research Agent → research outputs
+- GitHub IP Agent → `content/journey/github/**`
+- WeChat Agent → `content/journey/wechat/**` + `content/writing/wechat/**`
+- Meeting Agent → its Work project directory
+- Retail Agent → its Work project directory
+- InvestDesk Agent → its Work project directory
+- Reading Agent → `content/learning/reading/**`
+- Research Agent → `content/writing/research/**`
+- Product Owner / future Writing Agent → `content/writing/essays/**` + `content/writing/talks/**`
 
 Each Agent works through narrow PRs.
 
 Exit criteria:
-At least the core homepage and key detail pages have real, reviewable content.
+At least the core homepage and key detail pages have real, reviewable content with publication state and public-safe evidence.
 
 ## Phase 4 — Core Pages
 
@@ -120,10 +144,12 @@ Implement and verify:
 - Person / ProfilePage structured data;
 - Article / project structured data where appropriate;
 - identity links;
-- stable internal linking.
+- stable internal linking;
+- language metadata where useful;
+- exclusion of non-published content from normal indexing.
 
 Goal:
-Make the site understandable to both search engines and AI systems.
+Make the site understandable to both search engines and AI systems without exposing unapproved content.
 
 ## Phase 6 — QA & Launch
 
@@ -133,6 +159,8 @@ Review:
 - Mobile
 - Accessibility
 - Content truthfulness
+- Publication state
+- Evidence visibility / redaction
 - Broken links
 - Build / deployment
 - Structured data
@@ -149,23 +177,33 @@ No traditional server is required for the MVP.
 
 After launch:
 
+```
 Domain Agent
 → structured content update
+→ draft / review
 → PR
 → validation
 → build / preview
 → human review
 → merge
-→ automatic deployment
+→ deployment
+→ public rendering only when publication_status == published
+```
 
-The website becomes a continuously maintained public evidence and identity system.
+Important:
+
+**Merge does not equal Publish.**
+
+A merged `draft` or `review` remains non-public.
+
+The website becomes a continuously maintained public evidence and identity system with human-controlled publication.
 
 ## Current Critical Path
 
-1. Merge Architecture Pack v1.
+1. Merge Architecture Pack v1 after contract-hardening review passes.
 2. Re-scope existing PR #1 from old Home implementation to Site Foundation.
 3. Update navigation and page shells.
-4. Introduce content architecture.
+4. Introduce content architecture and publication controls.
 5. Begin parallel Domain Agent content production.
 6. Build pages from real content.
 7. Add discoverability layer.
@@ -182,6 +220,7 @@ Do not add yet unless a real requirement appears:
 - personalization;
 - AI chatbot;
 - complex analytics platform;
-- traditional VPS / server management.
+- traditional VPS / server management;
+- full bilingual localization.
 
 Smallest Sufficient Architecture remains the default.
