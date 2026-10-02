@@ -6,6 +6,17 @@ export interface NowTheme {
   relatedProject?: string;
 }
 
+/**
+ * Publicly published "Now" directions.
+ *
+ * Scope is an explicit Product Owner decision: only directions with sustained
+ * real practice are published. A direction that is not mature enough to show is
+ * simply absent — it is not reworded until it sounds mature, and it is not
+ * replaced with a broader investment / finance / research framing.
+ *
+ * Not published: "AI + Investing" — held back together with the Wealth
+ * Management Hub project it referenced.
+ */
 export const nowThemes: NowTheme[] = [
   {
     id: 'product-engineering',
@@ -51,18 +62,5 @@ export const nowThemes: NowTheme[] = [
       'Contract definition',
       'AI-native product development',
     ],
-  },
-  {
-    id: 'ai-investing',
-    title: 'AI + Investing',
-    description:
-      'Through the Wealth Management Hub, exploring how AI supports long-term research and personal decisions.',
-    practices: [
-      'Information workflows',
-      'Skills',
-      'AI research',
-      'Decision support',
-    ],
-    relatedProject: 'wealth-management-hub',
   },
 ];

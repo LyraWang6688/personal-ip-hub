@@ -2,10 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
 import SectionHeader from '../components/SectionHeader.astro';
+import ProjectPreview from '../components/ProjectPreview.astro';
 import NowThemeCard from '../components/NowThemeCard.astro';
 import EmptyState from '../components/EmptyState.astro';
 import Button from '../components/Button.astro';
 import TextLink from '../components/TextLink.astro';
+import { projects } from '../data/projects';
 import { aiWorkflowSteps } from '../data/method';
 import { nowThemes } from '../data/now';
 import { evidenceChannels } from '../data/evidence-channels';
@@ -21,10 +23,11 @@ import { evidenceChannels } from '../data/evidence-channels';
  * invented copy. Section order and the value proposition are Product Owner
  * decisions and must not be changed here without that direction.
  *
- * Featured Work (§03) intentionally renders no project cards: choosing a featured
- * subset is a Product Owner editorial decision (Agent Ownership v1 §12), and
- * listing every project here would itself be a selection made by the Site Owner.
- * Full project records live at /work.
+ * Featured Work (§03) renders the Product Owner's approved featured selection.
+ * That selection now equals the published project set, so it is read from
+ * src/data/projects.ts rather than duplicated here. Featuring is still an
+ * editorial decision (Agent Ownership v1 §12): do not add, remove or reorder the
+ * records shown in §03 without Product Owner direction.
  */
 ---
 
@@ -76,20 +79,15 @@ import { evidenceChannels } from '../data/evidence-channels';
     <SectionHeader
       eyebrow="Featured Work"
       title="Selected proof"
-      description="Selected proof through real products and systems."
+      description="Selected proof through real products and systems — work that has been built and iterated through multiple phases."
     />
     <!--
-      Featured selection is a Product Owner editorial decision (Agent Ownership
-      v1 §12). Rendering all projects here would itself be an editorial selection
-      made by the Site Owner, so the section keeps its structure and renders no
-      project cards. Full project records remain available at /work — listing
-      projects under Work is a different editorial state from featuring them here.
-      Do not add a `featured` flag to project data without Product Owner direction.
+      Product Owner has confirmed the featured selection. Records and their order
+      come from src/data/projects.ts; do not add, remove or reorder them here.
     -->
-    <EmptyState
-      note="No featured work selected yet."
-      detail="All current project records are available under Work."
-    />
+    <div class="projects-list">
+      {projects.map((project, index) => <ProjectPreview project={project} index={index} />)}
+    </div>
     <div class="section-footer-link">
       <TextLink href="/work">See all work</TextLink>
     </div>
@@ -279,6 +277,9 @@ import { evidenceChannels } from '../data/evidence-channels';
   /* ---------- Shared ---------- */
   .section-footer-link {
     margin-top: var(--space-6);
+  }
+  .projects-list {
+    margin-bottom: var(--space-4);
   }
 
   /* ---------- AI Workflow preview ---------- */
