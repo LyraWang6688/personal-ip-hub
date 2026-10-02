@@ -93,6 +93,7 @@ Implement:
 - public rendering filter for `published`;
 - evidence visibility rules;
 - redaction-aware evidence handling;
+- safe external referencing for private/internal evidence so sensitive artifacts never enter the public repository;
 - homepage editorial config;
 - language metadata where relevant.
 

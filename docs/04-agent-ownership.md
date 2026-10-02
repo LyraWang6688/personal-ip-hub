@@ -102,7 +102,8 @@ Should not:
 - modify shared components;
 - define overall personal identity;
 - overwrite project narratives owned by Project Agents;
-- publish evidence that is not explicitly public-safe.
+- publish evidence that is not explicitly public-safe;
+- commit private/internal evidence or sensitive metadata into the public repository.
 
 ## 6. WeChat Agent
 
@@ -264,11 +265,12 @@ A content Agent should:
 2. keep each PR narrowly scoped;
 3. include evidence references where appropriate;
 4. classify evidence visibility;
-5. avoid unrelated formatting or component changes;
-6. pass schema validation;
-7. pass site build;
-8. preserve publication state;
-9. request review before public publication.
+5. never commit sensitive private/internal evidence to the public repository; use only a safe reference when needed;
+6. avoid unrelated formatting or component changes;
+7. pass schema validation;
+8. pass site build;
+9. preserve publication state;
+10. request review before public publication.
 
 ## 15. Shared State / Single Source of Truth
 

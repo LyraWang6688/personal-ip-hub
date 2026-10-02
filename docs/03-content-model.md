@@ -88,8 +88,10 @@ Rules:
 - **Verified Evidence ≠ Public Evidence.**
 - Only evidence approved as `public` may be rendered publicly.
 - If `redaction_required == true`, the public site must use a redacted artifact or public-safe representation.
-- Private or internal evidence may support editorial verification without being exposed.
-- Secrets, credentials, personal information, customer data, private repository data, internal URLs, and confidential business information must not be published.
+- Private or internal evidence may support editorial verification without being exposed on the website.
+- Because this repository is public, **private/internal evidence itself and sensitive metadata must not be stored in this repository**. Keep the underlying artifact in an appropriate private system; the public repo may store only a non-sensitive reference or opaque identifier when needed.
+- Publication filtering is not a confidentiality boundary: hiding an item from the generated website does not make content committed to a public Git repository private.
+- Secrets, credentials, personal information, customer data, private repository data, internal URLs, and confidential business information must not be committed to the public repository or published.
 
 ## 5. Cross-Domain Source-of-Truth Contract
 

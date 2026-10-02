@@ -112,6 +112,8 @@ Before evidence becomes public, check for:
 
 If redaction is required, publish only the redacted or public-safe representation.
 
+Because the website repository is public, private/internal evidence and sensitive metadata must remain outside this repository. A build-time visibility filter protects the website surface, not the Git repository history. Only non-sensitive references or opaque identifiers may be stored here for private/internal evidence.
+
 The Product Owner is the final authority for public publication of sensitive evidence.
 
 ## 5. Publication & Indexability
