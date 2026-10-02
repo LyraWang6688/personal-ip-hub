@@ -6,6 +6,8 @@ import SectionHeader from '../components/SectionHeader.astro';
 import EmptyState from '../components/EmptyState.astro';
 import TextLink from '../components/TextLink.astro';
 import { evidenceChannels } from '../data/evidence-channels';
+
+// Only channels with a confirmed public URL are rendered.
 ---
 
 <BaseLayout
@@ -18,7 +20,6 @@ import { evidenceChannels } from '../data/evidence-channels';
     description="Who is behind this work, what the current focus is, and how to get in touch. This is not a CV, and no claim is made here that is not confirmed."
   />
 
-  <!-- Only profiles with a confirmed public URL are rendered. -->
   <Section id="profiles">
     <SectionHeader
       title="Public profiles"

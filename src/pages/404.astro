@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Section from '../components/Section.astro';
+import Button from '../components/Button.astro';
+
+// Deliberately minimal: no personal content, no request identifiers, and no
+// attempt to route the visitor anywhere other than back into the site.
+---
+
+<BaseLayout
+  title="Page Not Found — Lyra Wang"
+  description="The page you're looking for doesn't exist or may have moved."
+  noindex
+>
+  <PageHeader
+    eyebrow="404"
+    title="Page not found"
+    description="The page you're looking for doesn't exist or may have moved."
+  />
+
+  <Section id="return">
+    <div class="actions">
+      <Button href="/" variant="primary">Back to home</Button>
+      <Button href="/work" variant="secondary">View work</Button>
+    </div>
+  </Section>
+</BaseLayout>
+
+<style>
+  .actions {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    .actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>

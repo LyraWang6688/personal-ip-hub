@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://lyrawang.bamamei.online/sitemap-index.xml
