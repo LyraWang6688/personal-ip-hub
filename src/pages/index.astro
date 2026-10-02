@@ -1,0 +1,374 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Section from '../components/Section.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ProjectPreview from '../components/ProjectPreview.astro';
+import NowThemeCard from '../components/NowThemeCard.astro';
+import EmptyState from '../components/EmptyState.astro';
+import Button from '../components/Button.astro';
+import TextLink from '../components/TextLink.astro';
+import { projects } from '../data/projects';
+import { aiWorkflowSteps } from '../data/method';
+import { nowThemes } from '../data/now';
+import { evidenceChannels } from '../data/evidence-channels';
+
+/**
+ * Home is a persuasion narrative, not a directory (IA v1 §3).
+ *
+ * Section order is the frozen sequence from the Architecture Pack:
+ *   01 Hero · 02 What I Bring · 03 Featured Work · 04 How I Work · 05 How I Learn
+ *   06 Journey · 07 Selected Writing & Research · 08 Now · 09 Connect
+ *
+ * Sections without confirmed content render a restrained empty state rather than
+ * invented copy. Section order and the value proposition are Product Owner
+ * decisions and must not be changed here without that direction.
+ *
+ * Featured Work (§03) renders the Product Owner's approved featured selection.
+ * That selection now equals the published project set, so it is read from
+ * src/data/projects.ts rather than duplicated here. Featuring is still an
+ * editorial decision (Agent Ownership v1 §12): do not add, remove or reorder the
+ * records shown in §03 without Product Owner direction.
+ */
+---
+
+<BaseLayout
+  title="Lyra Wang — Personal IP Hub"
+  description="A public record of work, working method, learning, and writing."
+>
+  <!-- ============================================================
+       01 — Hero
+       ============================================================ -->
+  <section class="hero" aria-labelledby="hero-heading">
+    <div class="container hero-inner">
+      <p class="hero-eyebrow metadata">Personal IP Hub</p>
+      <h1 id="hero-heading" class="hero-title">Lyra Wang</h1>
+      <!--
+        TODO (Product Owner): the personal positioning statement has not been
+        confirmed. The line below describes what this site holds, not who Lyra is,
+        so that no unconfirmed claim is presented as fact. Replace it only with
+        confirmed wording.
+      -->
+      <p class="hero-identity">A public record of work, method, learning, and writing.</p>
+      <div class="hero-ctas">
+        <Button href="/work" variant="primary" size="lg">View Work</Button>
+        <Button href="/how-i-work" variant="secondary" size="lg">How I Work</Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       02 — What I Bring
+       Value proposition. Reserved: see empty state.
+       ============================================================ -->
+  <Section id="what-i-bring">
+    <SectionHeader
+      eyebrow="What I Bring"
+      title="The kinds of problems this work addresses"
+      description="This section is reserved for a statement of what value this work creates."
+    />
+    <EmptyState
+      note="Not yet published."
+      detail="The value proposition is a decision reserved to the site owner and is published only once confirmed."
+    />
+  </Section>
+
+  <!-- ============================================================
+       03 — Featured Work
+       ============================================================ -->
+  <Section id="featured-work" className="section-alt">
+    <SectionHeader
+      eyebrow="Featured Work"
+      title="Selected proof"
+      description="Selected proof through real products and systems — work that has been built and iterated through multiple phases."
+    />
+    <!--
+      Product Owner has confirmed the featured selection. Records and their order
+      come from src/data/projects.ts; do not add, remove or reorder them here.
+    -->
+    <div class="projects-list">
+      {projects.map((project, index) => <ProjectPreview project={project} index={index} />)}
+    </div>
+    <div class="section-footer-link">
+      <TextLink href="/work">See all work</TextLink>
+    </div>
+  </Section>
+
+  <!-- ============================================================
+       04 — How I Work
+       ============================================================ -->
+  <Section id="how-i-work">
+    <SectionHeader
+      eyebrow="How I Work"
+      title="Not just using AI tools — practicing an AI-native working method"
+      description="AI is a way of working rather than a tool wall: framing problems clearly, defining contracts, letting AI implement, reviewing independently, and verifying through real runtime."
+    />
+    <div class="workflow">
+      <ol class="workflow-steps" aria-label="AI collaboration workflow">
+        {aiWorkflowSteps.map((step, index) => (
+          <li class="workflow-step">
+            <span class="workflow-number metadata">{String(index + 1).padStart(2, '0')}</span>
+            <span class="workflow-label">{step}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <div class="section-footer-link">
+      <TextLink href="/how-i-work">Read the full method</TextLink>
+    </div>
+  </Section>
+
+  <!-- ============================================================
+       05 — How I Learn
+       ============================================================ -->
+  <Section id="how-i-learn" className="section-alt">
+    <SectionHeader
+      eyebrow="How I Learn"
+      title="How understanding develops"
+      description="Learning is recorded as it actually happens — through projects, reading, notes, and open questions — rather than as a list of courses or certificates."
+    />
+    <EmptyState
+      note="Not yet published."
+      detail="Learning records are added under the Learning domain once they are verified."
+    />
+    <div class="section-footer-link">
+      <TextLink href="/learning">Go to Learning</TextLink>
+    </div>
+  </Section>
+
+  <!-- ============================================================
+       06 — Journey
+       ============================================================ -->
+  <Section id="journey">
+    <SectionHeader
+      eyebrow="Journey"
+      title="Time × Evidence"
+      description="Public traces left over time, and the milestones that mark meaningful change."
+    />
+    <ul class="channels">
+      {
+        evidenceChannels.map((channel) => (
+          <li class="channel">
+            <p class="channel-type metadata">{channel.type}</p>
+            <h3 class="channel-label">{channel.label}</h3>
+            <p class="channel-description">{channel.description}</p>
+            {channel.url && (
+              <TextLink href={channel.url} external>
+                Visit
+              </TextLink>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+    <EmptyState
+      note="No milestones published yet."
+      detail="Milestones are added once the date and the change they represent are both confirmed."
+    />
+    <div class="section-footer-link">
+      <TextLink href="/journey">Explore the journey</TextLink>
+    </div>
+  </Section>
+
+  <!-- ============================================================
+       07 — Selected Writing & Research
+       ============================================================ -->
+  <Section id="writing" className="section-alt">
+    <SectionHeader
+      eyebrow="Selected Writing & Research"
+      title="Formed for public expression"
+      description="Essays, articles, research, and talks. Learning notes stay under Learning unless they are deliberately developed into a public piece."
+    />
+    <EmptyState
+      note="Not yet published."
+      detail="Nothing is listed here until a piece is actually published and its public link is confirmed."
+    />
+    <div class="section-footer-link">
+      <TextLink href="/writing">Go to Writing &amp; Research</TextLink>
+    </div>
+  </Section>
+
+  <!-- ============================================================
+       08 — Now
+       ============================================================ -->
+  <Section id="now">
+    <SectionHeader
+      eyebrow="Now"
+      title="What I'm working on and learning — through practice"
+      description="What is being learned by doing, right now, through real projects."
+    />
+    <div class="now-grid">
+      {nowThemes.map((theme) => <NowThemeCard theme={theme} />)}
+    </div>
+    <div class="section-footer-link">
+      <TextLink href="/now">See what I'm doing now</TextLink>
+    </div>
+  </Section>
+
+  <!-- ============================================================
+       09 — Connect
+       ============================================================ -->
+  <Section id="connect" className="section-alt">
+    <SectionHeader
+      eyebrow="Connect"
+      title="Where to go next"
+      description="Explore the work, follow the writing, or get in touch."
+    />
+    <ul class="connect-list">
+      {
+        evidenceChannels.map((channel) => (
+          <li class="connect-item">
+            <h3 class="connect-label">{channel.label}</h3>
+            {channel.url && (
+              <TextLink href={channel.url} external>
+                {channel.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+              </TextLink>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+    <EmptyState
+      note="Contact details not published yet."
+      detail="A contact address is added once it is confirmed and safe to publish."
+    />
+  </Section>
+</BaseLayout>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: var(--space-10) 0 var(--space-9);
+  }
+  .hero-inner {
+    max-width: var(--container-narrow);
+  }
+  .hero-eyebrow {
+    margin-bottom: var(--space-5);
+  }
+  .hero-title {
+    font-size: var(--font-size-display);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    margin-bottom: var(--space-5);
+  }
+  .hero-identity {
+    font-family: var(--font-display);
+    font-size: var(--font-size-h3);
+    font-style: italic;
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin-bottom: var(--space-7);
+    max-width: 32rem;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  /* ---------- Section alt background ---------- */
+  .section-alt {
+    background: var(--color-surface);
+    border-block: 1px solid var(--color-border);
+  }
+
+  /* ---------- Shared ---------- */
+  .section-footer-link {
+    margin-top: var(--space-6);
+  }
+  .projects-list {
+    margin-bottom: var(--space-4);
+  }
+
+  /* ---------- AI Workflow preview ---------- */
+  .workflow-steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: center;
+  }
+  .workflow-step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+  }
+  .workflow-number {
+    color: var(--color-text-muted);
+    font-family: var(--font-display);
+  }
+  .workflow-label {
+    font-size: var(--font-size-body-small);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* ---------- Journey / Connect channels ---------- */
+  .channels,
+  .connect-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+    gap: var(--space-6);
+    margin-bottom: var(--space-4);
+  }
+  .channel,
+  .connect-item {
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--color-border);
+  }
+  .channel-type {
+    margin-bottom: var(--space-3);
+  }
+  .channel-label,
+  .connect-label {
+    font-size: var(--font-size-h4);
+    margin-bottom: var(--space-2);
+  }
+  .channel-description {
+    font-size: var(--font-size-body-small);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: var(--space-4);
+  }
+
+  /* ---------- Now ---------- */
+  .now-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 768px) {
+    .hero {
+      padding: var(--space-9) 0 var(--space-8);
+    }
+    .now-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .channels,
+    .connect-list {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .workflow-steps {
+      gap: var(--space-2);
+    }
+    .workflow-step {
+      padding: var(--space-2) var(--space-3);
+    }
+    .hero-ctas {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .hero-ctas .btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>

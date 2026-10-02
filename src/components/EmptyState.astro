@@ -1,0 +1,42 @@
+---
+/**
+ * Restrained empty state.
+ *
+ * Used where a section of the information architecture exists but has no
+ * confirmed, publishable content yet. It states that nothing is published and
+ * describes what the section will hold — it must never imply a fact about Lyra
+ * or dress up missing content as real content.
+ *
+ * Real editorial rationale belongs in source comments, not in this copy.
+ */
+interface Props {
+  /** Short primary statement. Defaults to a plain "nothing published" line. */
+  note?: string;
+  /** Optional structural description of what the section will hold. */
+  detail?: string;
+}
+const { note = 'Not yet published.', detail } = Astro.props;
+---
+
+<div class="empty-state">
+  <p class="empty-state-note">{note}</p>
+  {detail && <p class="empty-state-detail caption">{detail}</p>}
+</div>
+
+<style>
+  .empty-state {
+    border-top: 1px solid var(--color-border);
+    padding-block: var(--space-6);
+    max-width: var(--container-narrow);
+  }
+  .empty-state-note {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--font-size-body);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-3);
+  }
+  .empty-state-detail {
+    color: var(--color-text-muted);
+  }
+</style>

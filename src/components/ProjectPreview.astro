@@ -1,0 +1,112 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+const { project, index } = Astro.props;
+---
+
+<article class="project-preview">
+  <div class="project-meta">
+    <span class="project-index metadata">{String(index + 1).padStart(2, '0')}</span>
+  </div>
+
+  <div class="project-header">
+    <h3 class="project-name">{project.name}</h3>
+    <p class="project-name-zh" lang="zh-Hans">{project.nameZh}</p>
+  </div>
+
+  <p class="project-tagline">{project.tagline}</p>
+
+  <div class="project-body">
+    <div class="project-field">
+      <p class="field-label metadata">Problem</p>
+      <p class="field-text">{project.problem}</p>
+    </div>
+    <div class="project-field">
+      <p class="field-label metadata">Practice</p>
+      <p class="field-text">{project.practice}</p>
+    </div>
+    <div class="project-field">
+      <p class="field-label metadata">Current Stage</p>
+      <p class="field-text">{project.currentStage}</p>
+    </div>
+    <div class="project-field">
+      <p class="field-label metadata">Evidence</p>
+      <p class="field-text">{project.evidence}</p>
+    </div>
+  </div>
+</article>
+
+<style>
+  .project-preview {
+    padding: var(--space-6) 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .project-preview:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  /* Only the record index remains above the project header. Project state is
+     carried by the Current Stage field, which is the single source of truth for
+     how far along a project is — there is no separate status badge. */
+  .project-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-4);
+  }
+  .project-index {
+    font-family: var(--font-display);
+    font-size: var(--font-size-caption);
+    color: var(--color-text-muted);
+  }
+
+  .project-header {
+    margin-bottom: var(--space-3);
+  }
+  .project-name {
+    font-size: var(--font-size-h3);
+    margin-bottom: var(--space-1);
+  }
+  .project-name-zh {
+    font-size: var(--font-size-body-small);
+    color: var(--color-text-muted);
+  }
+
+  .project-tagline {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--font-size-body);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-5);
+    max-width: 36rem;
+    line-height: 1.6;
+  }
+
+  .project-body {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-5) var(--space-6);
+  }
+
+  .field-label {
+    margin-bottom: var(--space-2);
+  }
+  .field-text {
+    font-size: var(--font-size-body-small);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-body);
+  }
+
+  @media (max-width: 768px) {
+    .project-body {
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+    .project-preview {
+      padding: var(--space-5) 0;
+    }
+  }
+</style>
