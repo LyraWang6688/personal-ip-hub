@@ -28,6 +28,11 @@ import { evidenceChannels } from '../data/evidence-channels';
  * src/data/projects.ts rather than duplicated here. Featuring is still an
  * editorial decision (Agent Ownership v1 §12): do not add, remove or reorder the
  * records shown in §03 without Product Owner direction.
+ *
+ * TODO (Product Owner): the personal positioning statement in the Hero has not
+ * been confirmed. That line deliberately describes what this site holds rather
+ * than who Lyra is, so that no unconfirmed claim is presented as fact. Replace it
+ * only with confirmed wording.
  */
 ---
 
@@ -35,19 +40,11 @@ import { evidenceChannels } from '../data/evidence-channels';
   title="Lyra Wang — Personal IP Hub"
   description="A public record of work, working method, learning, and writing."
 >
-  <!-- ============================================================
-       01 — Hero
-       ============================================================ -->
+  {/* 01 — Hero */}
   <section class="hero" aria-labelledby="hero-heading">
     <div class="container hero-inner">
       <p class="hero-eyebrow metadata">Personal IP Hub</p>
       <h1 id="hero-heading" class="hero-title">Lyra Wang</h1>
-      <!--
-        TODO (Product Owner): the personal positioning statement has not been
-        confirmed. The line below describes what this site holds, not who Lyra is,
-        so that no unconfirmed claim is presented as fact. Replace it only with
-        confirmed wording.
-      -->
       <p class="hero-identity">A public record of work, method, learning, and writing.</p>
       <div class="hero-ctas">
         <Button href="/work" variant="primary" size="lg">View Work</Button>
@@ -56,10 +53,7 @@ import { evidenceChannels } from '../data/evidence-channels';
     </div>
   </section>
 
-  <!-- ============================================================
-       02 — What I Bring
-       Value proposition. Reserved: see empty state.
-       ============================================================ -->
+  {/* 02 — What I Bring */}
   <Section id="what-i-bring">
     <SectionHeader
       eyebrow="What I Bring"
@@ -72,19 +66,13 @@ import { evidenceChannels } from '../data/evidence-channels';
     />
   </Section>
 
-  <!-- ============================================================
-       03 — Featured Work
-       ============================================================ -->
+  {/* 03 — Featured Work */}
   <Section id="featured-work" className="section-alt">
     <SectionHeader
       eyebrow="Featured Work"
       title="Selected proof"
       description="Selected proof through real products and systems — work that has been built and iterated through multiple phases."
     />
-    <!--
-      Product Owner has confirmed the featured selection. Records and their order
-      come from src/data/projects.ts; do not add, remove or reorder them here.
-    -->
     <div class="projects-list">
       {projects.map((project, index) => <ProjectPreview project={project} index={index} />)}
     </div>
@@ -93,9 +81,7 @@ import { evidenceChannels } from '../data/evidence-channels';
     </div>
   </Section>
 
-  <!-- ============================================================
-       04 — How I Work
-       ============================================================ -->
+  {/* 04 — How I Work */}
   <Section id="how-i-work">
     <SectionHeader
       eyebrow="How I Work"
@@ -117,9 +103,7 @@ import { evidenceChannels } from '../data/evidence-channels';
     </div>
   </Section>
 
-  <!-- ============================================================
-       05 — How I Learn
-       ============================================================ -->
+  {/* 05 — How I Learn */}
   <Section id="how-i-learn" className="section-alt">
     <SectionHeader
       eyebrow="How I Learn"
@@ -135,9 +119,7 @@ import { evidenceChannels } from '../data/evidence-channels';
     </div>
   </Section>
 
-  <!-- ============================================================
-       06 — Journey
-       ============================================================ -->
+  {/* 06 — Journey */}
   <Section id="journey">
     <SectionHeader
       eyebrow="Journey"
@@ -169,9 +151,7 @@ import { evidenceChannels } from '../data/evidence-channels';
     </div>
   </Section>
 
-  <!-- ============================================================
-       07 — Selected Writing & Research
-       ============================================================ -->
+  {/* 07 — Selected Writing & Research */}
   <Section id="writing" className="section-alt">
     <SectionHeader
       eyebrow="Selected Writing & Research"
@@ -187,9 +167,7 @@ import { evidenceChannels } from '../data/evidence-channels';
     </div>
   </Section>
 
-  <!-- ============================================================
-       08 — Now
-       ============================================================ -->
+  {/* 08 — Now */}
   <Section id="now">
     <SectionHeader
       eyebrow="Now"
@@ -204,9 +182,7 @@ import { evidenceChannels } from '../data/evidence-channels';
     </div>
   </Section>
 
-  <!-- ============================================================
-       09 — Connect
-       ============================================================ -->
+  {/* 09 — Connect */}
   <Section id="connect" className="section-alt">
     <SectionHeader
       eyebrow="Connect"

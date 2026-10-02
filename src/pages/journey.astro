@@ -18,6 +18,12 @@ const journeyAreas = [
   'Personal IP journey',
   'Milestones',
 ];
+
+// Evidence channels (IA v1 §10). Only channels with a confirmed public URL render
+// here. The retired "Digital Footprints" domain was a list of platform links; it is
+// not replaced by a Journey that is only a link list — those links live here as
+// evidence entry points, while the Journey structure below carries the timeline
+// semantics.
 ---
 
 <BaseLayout
@@ -30,13 +36,6 @@ const journeyAreas = [
     description="This domain records when a meaningful change happened. It references work, learning, and writing rather than restating their detail, so the same story is not told twice."
   />
 
-  <!--
-    Evidence channels (IA v1 §10). GitHub is the only channel with a confirmed
-    public URL, so it is the only one rendered. The retired "Digital Footprints"
-    domain was a list of platform links; it is not replaced by a Journey that is
-    only a link list — the links live here as evidence entry points while the
-    Journey structure below carries the timeline semantics.
-  -->
   <Section id="evidence">
     <SectionHeader
       title="Public evidence"

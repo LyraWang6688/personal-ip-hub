@@ -6,6 +6,15 @@ import SectionHeader from '../components/SectionHeader.astro';
 import ProjectPreview from '../components/ProjectPreview.astro';
 import EmptyState from '../components/EmptyState.astro';
 import { projects } from '../data/projects';
+
+// Real project records lead the page. These records came from the previous Home
+// implementation and are kept because they describe real projects with stated
+// evidence.
+
+// Declared IA structure: Work is grouped into these two areas (IA v1 §4). Which
+// project belongs to which group is an editorial decision owned by the Product
+// Owner and has not been made, so both groups render as structure only. Do not
+// assign a project to a group without that direction.
 ---
 
 <BaseLayout
@@ -18,11 +27,6 @@ import { projects } from '../data/projects';
     description="This domain records where the real project activity happened: the problem being addressed, the approach taken, what changed over time, and the current state."
   />
 
-  <!--
-    Real project records lead the page. These four records came from the previous
-    Home implementation and are kept because they describe real projects with
-    stated evidence.
-  -->
   <Section id="records">
     <SectionHeader
       title="Project records"
@@ -33,12 +37,6 @@ import { projects } from '../data/projects';
     </div>
   </Section>
 
-  <!--
-    Declared IA structure: Work is grouped into these two areas (IA v1 §4).
-    Which project belongs to which group is an editorial decision owned by the
-    Product Owner and has not been made, so both groups are rendered as structure
-    only. Do not assign a project to a group without that direction.
-  -->
   <Section id="organisation" className="section-alt">
     <SectionHeader
       title="How this area is organised"

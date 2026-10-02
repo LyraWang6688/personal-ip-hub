@@ -12,17 +12,29 @@ interface Props {
    * attribute instead of changing the document language.
    */
   lang?: string;
+  /**
+   * Set on pages that must not be treated as content entry points (currently only
+   * the 404 page). Emits `noindex` and omits the self-referential canonical URL.
+   */
+  noindex?: boolean;
 }
 
 const {
   title = 'Lyra Wang — Personal IP Hub',
   description = 'Personal IP Hub — a public record of work, working methods, learning, and writing.',
   lang = 'en',
+  noindex = false,
 } = Astro.props;
 
 // Canonical is derived from `site` in astro.config.mjs. When no site is
 // configured the tag is omitted rather than emitting a relative/incorrect URL.
-const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+const canonical =
+  !noindex && Astro.site ? new URL(Astro.url.pathname, Astro.site).href : undefined;
+
+// TODO (Discoverability phase): add a real og:image and then switch
+// twitter:card back to `summary_large_image`. It is deliberately `summary`
+// below because no Open Graph image asset exists yet — declaring
+// `summary_large_image` without an image advertises an asset that is not there.
 ---
 
 <!doctype html>
@@ -32,37 +44,25 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Primary SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="author" content="Lyra Wang" />
+    {noindex && <meta name="robots" content="noindex" />}
     {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="sitemap" type="application/xml" href="/sitemap-index.xml" />
 
-    <!-- Open Graph -->
-    <!--
-      TODO (Discoverability phase): add a real og:image and then switch
-      twitter:card back to `summary_large_image`. It is deliberately `summary`
-      here because no Open Graph image asset exists yet — declaring
-      `summary_large_image` without an image advertises an asset that is not there.
-    -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:site_name" content="Lyra Wang — Personal IP Hub" />
     {canonical && <meta property="og:url" content={canonical} />}
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
 
-    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-    <!--
-      Newsreader is self-hosted (see @font-face in src/styles/global.css).
-      No third-party font CDN is loaded.
-    -->
     <link
       rel="preload"
       href="/fonts/newsreader-latin-var.woff2"

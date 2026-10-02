@@ -5,6 +5,9 @@ import Section from '../components/Section.astro';
 import SectionHeader from '../components/SectionHeader.astro';
 import EmptyState from '../components/EmptyState.astro';
 import TextLink from '../components/TextLink.astro';
+
+// "Currently learning" lives on /now. It is linked rather than duplicated, so the
+// same fact is not maintained in two places (IA v1 §11).
 ---
 
 <BaseLayout
@@ -17,10 +20,6 @@ import TextLink from '../components/TextLink.astro';
     description="This domain records what was learned and how understanding changed. It is the source of truth for learning, and reading is one of its subdomains rather than a separate area."
   />
 
-  <!--
-    "Currently learning" lives on /now. It is linked rather than duplicated so
-    that the same fact is not maintained in two places (IA v1 §11).
-  -->
   <Section id="currently-learning">
     <SectionHeader
       title="Currently learning"

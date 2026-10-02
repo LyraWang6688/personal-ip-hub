@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   /**
@@ -20,4 +21,8 @@ export default defineConfig({
   build: {
     format: 'directory',
   },
+  // Emits sitemap-index.xml + sitemap-0.xml at build time. Kept at defaults:
+  // no changefreq / priority / lastmod, and the 404 page is filtered out so the
+  // sitemap lists only real public content routes.
+  integrations: [sitemap({ filter: (page) => !page.includes('/404') })],
 });
