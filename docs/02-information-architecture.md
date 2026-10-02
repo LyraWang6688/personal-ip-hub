@@ -1,5 +1,11 @@
 # Personal IP Hub — Information Architecture v1
 
+> **Note:** Projects named in this document (for example WeChat Publishing System) are
+> **architecture examples**, not the current public project inventory.
+> The current public project SSOT is [`src/data/projects.ts`](../src/data/projects.ts).
+> A retired / archived project does not become public again merely because it still appears
+> as an example in this historical architecture document.
+
 ## 1. Top-Level Navigation
 
 Primary navigation:

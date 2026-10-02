@@ -152,15 +152,25 @@ Do not add a database, CMS, backend server, or infrastructure merely for technic
 
 ## 9. Deployment Principle
 
-Target public domain:
+Public domain:
 
 lyrawang.bamamei.online
 
-Preferred architecture:
+Current production architecture:
 
-GitHub → Static Build → Vercel / Cloudflare Pages → CDN → Custom Domain
+GitHub → Static Build → **Vercel** → CDN → Custom Domain
 
-The hosting provider is not yet frozen, but the site should remain portable and not depend on a traditional self-managed server.
+Current facts:
+
+- **Production provider = Vercel.** This is the frozen current provider, not a placeholder.
+- **Custom domain = lyrawang.bamamei.online.**
+- The static-first principle is unchanged: the product stays a static build with no traditional self-managed server.
+
+Provider portability remains an architecture principle: the build should not depend on
+Vercel-specific runtime features, so the host stays replaceable.
+
+Cloudflare Pages remains a possible future alternative provider. It is **not** the current
+production provider, and no migration is planned or in progress.
 
 ## 10. Success Test
 
