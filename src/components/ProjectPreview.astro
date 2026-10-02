@@ -6,19 +6,11 @@ interface Props {
   index: number;
 }
 const { project, index } = Astro.props;
-const statusLabel: Record<string, string> = {
-  active: 'Active',
-  iterating: 'Iterating',
-  building: 'Building',
-};
 ---
 
 <article class="project-preview">
   <div class="project-meta">
     <span class="project-index metadata">{String(index + 1).padStart(2, '0')}</span>
-    <span class:list={['project-status', `status-${project.status}`]}>
-      {statusLabel[project.status]}
-    </span>
   </div>
 
   <div class="project-header">
@@ -57,29 +49,18 @@ const statusLabel: Record<string, string> = {
     border-bottom: 1px solid var(--color-border);
   }
 
+  /* Only the record index remains above the project header. Project state is
+     carried by the Current Stage field, which is the single source of truth for
+     how far along a project is — there is no separate status badge. */
   .project-meta {
     display: flex;
     align-items: center;
-    gap: var(--space-4);
     margin-bottom: var(--space-4);
   }
   .project-index {
     font-family: var(--font-display);
     font-size: var(--font-size-caption);
     color: var(--color-text-muted);
-  }
-  .project-status {
-    font-size: var(--font-size-metadata);
-    text-transform: uppercase;
-    letter-spacing: var(--letter-spacing-uppercase);
-    padding: 2px 8px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--color-border-strong);
-    color: var(--color-text-secondary);
-  }
-  .status-active {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
   }
 
   .project-header {

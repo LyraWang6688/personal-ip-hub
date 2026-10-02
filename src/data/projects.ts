@@ -10,7 +10,6 @@ export interface Project {
   practice: string;
   currentStage: string;
   evidence: string;
-  status: 'active' | 'iterating' | 'building';
   year?: string;
   /**
    * The Work domain groups projects into "Flagship Products" and "AI Infrastructure".
@@ -32,8 +31,10 @@ export interface Project {
  *
  * Do not add a project without Product Owner approval, and do not add impact
  * claims (user counts, ROI, efficiency, revenue, investment return, audience
- * size, awards). `currentStage` and `evidence` state durable facts rather than
- * momentary status.
+ * size, awards). `currentStage` is the single source of truth for how far along a
+ * project is, and it states durable facts rather than a momentary status. There is
+ * deliberately no separate status / maturity / lifecycle field — a second state
+ * field would duplicate that source of truth and expire quickly.
  *
  * Not published: Wealth Management Hub — reviewed and held back as not yet at a
  * stable iteration stage. It is deliberately absent from the public source rather
@@ -52,7 +53,6 @@ export const projects: Project[] = [
     currentStage: 'Used in a real collaboration context and iterated through multiple phases.',
     evidence:
       'Integrated with Feishu (Lark) systems, across multiple tracked phases of iteration.',
-    status: 'active',
   },
   {
     id: 'retail-operations-system',
@@ -67,7 +67,6 @@ export const projects: Project[] = [
     currentStage: 'Multi-year project, continuously evolving.',
     evidence:
       'A real, multi-year project serving an actual retail business scenario. Multi-Agent collaboration (Architect / Developer / Reviewer / QA) is being practiced.',
-    status: 'iterating',
   },
   {
     id: 'wechat-publishing-system',
@@ -82,6 +81,5 @@ export const projects: Project[] = [
     currentStage: 'AI-native publishing workflow in use.',
     evidence:
       'Real pipeline from ChatGPT through GitHub to WeChat Official Account backend. Human review is intentionally retained.',
-    status: 'active',
   },
 ];
