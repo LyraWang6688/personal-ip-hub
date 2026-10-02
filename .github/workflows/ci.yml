@@ -1,0 +1,49 @@
+name: CI Safety Gate
+
+# Runs on every pull request targeting main, and once on main after a merge.
+# This is a validation gate only — it does not deploy or publish anything.
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+# Read-only: the gate validates the repository and never writes to it.
+permissions:
+  contents: read
+
+# Cancel superseded runs for the same pull request, so a new commit does not queue
+# behind its own previous run. For push events there is no pull request number, so
+# the group falls back to github.ref — this keeps `main` runs in a group of their
+# own, so they can neither cancel nor be cancelled by pull request runs.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # npm ci, not npm install: package-lock.json is committed, so CI must prove
+      # the dependency tree installs reproducibly from the lockfile.
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
