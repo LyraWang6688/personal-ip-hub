@@ -39,6 +39,10 @@ export interface Project {
  * Not published: Wealth Management Hub — reviewed and held back as not yet at a
  * stable iteration stage. It is deliberately absent from the public source rather
  * than kept as a dormant record or a hidden/private data source.
+ *
+ * Archived: WeChat Publishing System (wechat-article-pilot) was removed after that
+ * project was archived. The record was deleted rather than flagged — public scope
+ * needs no archive state until a page actually renders one.
  */
 export const projects: Project[] = [
   {
@@ -67,19 +71,5 @@ export const projects: Project[] = [
     currentStage: 'Multi-year project, continuously evolving.',
     evidence:
       'A real, multi-year project serving an actual retail business scenario. Multi-Agent collaboration (Architect / Developer / Reviewer / QA) is being practiced.',
-  },
-  {
-    id: 'wechat-publishing-system',
-    name: 'WeChat Publishing System',
-    nameZh: '微信公众号内容与发布系统',
-    tagline:
-      'An AI-native publishing workflow that reduces the friction of public output.',
-    problem:
-      'Publishing written work publicly involves a chain of discussion, drafting, formatting, version control, platform submission, review, and release — each step adds friction that stops ideas from being shared.',
-    practice:
-      'Built a pipeline: ChatGPT for content discussion and crystallization → formatted files → GitHub for version control → automated entry into WeChat Official Account backend → human review → publication. Keeps human review in the loop by design.',
-    currentStage: 'AI-native publishing workflow in use.',
-    evidence:
-      'Real pipeline from ChatGPT through GitHub to WeChat Official Account backend. Human review is intentionally retained.',
   },
 ];
