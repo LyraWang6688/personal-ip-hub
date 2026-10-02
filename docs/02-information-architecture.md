@@ -1,5 +1,11 @@
 # Personal IP Hub — Information Architecture v1
 
+> **Note:** This document is still a valid Information Architecture contract (Architecture
+> Pack v1). Projects named in it — for example WeChat Publishing System — are **architecture
+> examples**, and some examples may be historical or retired. Examples are **not** the Current
+> Public Project Inventory; that SSOT is [`src/data/projects.ts`](../src/data/projects.ts).
+> An archived or retired project appearing here does not republish it.
+
 ## 1. Top-Level Navigation
 
 Primary navigation:

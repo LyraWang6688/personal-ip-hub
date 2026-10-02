@@ -1,5 +1,13 @@
 # Personal IP Hub — Content Model & Contracts v1
 
+> **Status: Phase 2 Target Contract**
+>
+> This document defines the long-term target content model for Phase 2.
+> Current `main` does **not** yet implement `content/**`, the `publication_status` lifecycle,
+> schema validation, or Agent-owned structured content paths.
+> Current implementation state is defined by [`AGENTS.md`](../AGENTS.md) and the actual code.
+> Phase 2 resume entry: GitHub Issue #4.
+
 ## 1. Principle
 
 Content must be structured independently from page layout.

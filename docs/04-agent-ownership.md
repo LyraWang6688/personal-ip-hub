@@ -1,5 +1,14 @@
 # Personal IP Hub — Agent Ownership v1
 
+> **Status: Phase 2 Target Contract**
+>
+> This document defines the long-term target Agent Ownership model for Phase 2.
+> Current `main` does **not** yet implement `content/**`, Agent-owned content directories,
+> the `publication_status` lifecycle, or schema validation. The `content/**` paths below are
+> target paths, **not** existing paths.
+> Current implementation state is defined by [`AGENTS.md`](../AGENTS.md) and the actual code.
+> Phase 2 resume entry: GitHub Issue #4.
+
 ## 1. Principle
 
 Agents own content domains, not arbitrary pages.
