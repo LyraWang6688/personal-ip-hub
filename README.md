@@ -11,16 +11,24 @@ Lyra Wang's public Personal IP / Digital Identity Hub — a static-first site pr
 
 ## Current Implementation
 
-Astro static site, with public content currently defined in typed local data (not a structured content system):
+Current implementation is an Astro static site.
+
+Public content is currently split between:
+
+- page-authored copy in `src/pages/**`
+- typed local data in `src/data/**`
 
 ```
-src/pages/**        routes
+src/pages/**        routes (page-authored copy)
 src/components/**   shared UI
 src/layouts/**      page shell
-src/data/**         current content data
+src/data/**         typed local data
 ```
 
-- Public project inventory SSOT: [`src/data/projects.ts`](src/data/projects.ts)
+The current public project inventory SSOT is:
+[`src/data/projects.ts`](src/data/projects.ts)
+
+This is not yet the Phase 2 structured content system.
 
 `content/**`, `publication_status`, the draft/review/published/archived rendering lifecycle,
 Agent-owned content paths, and schema validation are **Phase 2 target architecture** and are

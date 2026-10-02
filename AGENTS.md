@@ -35,7 +35,7 @@ src/data/**         typed local data used by the pages
 ```
 
 - Current public project SSOT: `src/data/projects.ts`
-- Current data files: `src/data/projects.ts`, `methods.ts`, `now.ts`, `navigation.ts`, `evidence-channels.ts`
+- Current data files: `src/data/projects.ts`, `method.ts`, `now.ts`, `navigation.ts`, `evidence-channels.ts`
 - There is **no** `content/**` runtime, no content schema validation, and no publication-status
   runtime enforcement in the current implementation.
 
