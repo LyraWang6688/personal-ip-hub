@@ -1,0 +1,20 @@
+# personal-ip-hub
+
+> 面向「人类信任 + 机器理解」双重目标的个人数字身份站点，由多个领域 Agent 按统一 Content Contract 维护。
+
+## 核心文档
+
+- [README](./README.md)：项目说明与用法
+- [AGENTS.md](./AGENTS.md)：agent 进入本仓库前先读的规则
+
+## 主要章节
+
+- Current Status
+- Current Implementation
+- Documentation
+- Validation
+- Governance
+
+## 怎么用这份索引
+
+这是给 LLM / agent 的机器可读入口：先读上面的核心文档，再按章节名定位。
