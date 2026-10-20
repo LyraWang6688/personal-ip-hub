@@ -60,3 +60,5 @@ git diff --check
 - Merge does not equal Publish.
 - Private/internal evidence must not be committed to this public repository.
 - Phase 2 starts only after an explicit Product Owner decision on Issue #4.
+
+[![](https://img.shields.io/badge/powered_by-dsh-4D6BFE?style=flat-square&logo=deepseek&logoColor=white)](https://github.com/deepseek-ai/deepseek-harness)
